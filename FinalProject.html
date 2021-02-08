@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Weight Convertor</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        section {
+            margin: 50px 0;
+        }
+
+        .button {
+            border-radius: 25px;
+            display: block;
+            background-color: purple;
+            border: 1px solid #885df1;
+            color: #885df1;
+            font-size: 16px;
+            line-height: 22px;
+            padding: 16px 24px;
+            text-decoration: none;
+            transition: all 200ms ease;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;           
+            margin: 20px auto;
+            cursor: pointer;
+        }
+
+        button:hover {
+            color: green;
+            background: greenyellow;
+            border: 1px solid green;
+        }
+
+        h1,
+        h4 {
+            font-weight: 900;
+            line-height: 28px;
+            text-align: center;
+            padding: 28px 0;
+            border-radius: 10px;
+            margin: 0 auto;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #5522ff;
+            text-align: center;
+            font-size: 40px;
+        }
+
+        h4 {
+            text-align: center;
+            color: burlywood;
+            padding: 0 0 18px;
+            font-size: 28px;
+        }
+
+        p {
+            color: cyan;
+            text-align: right;
+            font-size: 20px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin: 0;
+        }
+
+        h4:hover {
+            background-color: darkolivegreen;
+            font-family: cursive;
+            text-decoration: underline;
+                }
+
+        p:hover {
+            font-family: cursive;
+            text-decoration: underline;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 0 20px;
+        }
+
+        h6 {
+            color: goldenrod;
+            text-align: left;
+            font-size: 16px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        h5 {
+            color: pink;
+            text-align: right;
+            font-size: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+        }
+
+        h5:hover {
+            font-family: cursive;
+            text-decoration: underline;
+            text-decoration-color: palevioletred;
+            color: paleturquoise;
+        }
+    </style>
+</head>
+
+<body bgcolor=#00000>
+    <section>
+        <p>
+        </p>
+        <h1> 
+            <u>
+                Weight Converter
+            </u>
+        </h1>
+        <img src="https://imgs.classicfm.com/images/127345?crop=16_9&width=660&relax=1&signature=RCyAZMoGxetvA5EMMn9rg4Qd3BQ="
+            alt="Weight Converter" width="300" />
+        <h4>
+            Kilograms: 0
+        </h4>
+        <h4>
+            Pounds: 0
+        </h4>
+        <h4>
+            Ounces: 0
+        </h4>
+        <h4>
+            Grams: 0
+        </h4>
+        <button class="button">
+            Click Here
+        </button>
+        <h6>
+            References:
+        </h6>
+        <a href="https://en.wikipedia.org/wiki/Kilogram">
+            Kilograms
+        </a> 
+        <br>
+        <a href="https://en.wikipedia.org/wiki/Pound_(mass)">
+            Pounds
+        </a>
+        <br>
+        <a href="https://en.wikipedia.org/wiki/Ounce">
+            Ounces
+        </a>
+        <br>
+        <a href="https://en.wikipedia.org/wiki/Gram">
+            Grams
+        </a>
+        <h5>
+            Developed By:
+            <br>
+            Niti Saxena
+        </h5>
+    </section>
+    <script>
+        let button = document.querySelector("button");
+        button.addEventListener("click", calculateweight);
+        function calculateweight() {
+            let weightInKgs = prompt("Enter kilograms...");
+            let name = prompt("Please Enter Your Name...");
+            let gender = prompt("Please Enter Your Gender...");
+            validationCheck(weightInKgs, name, gender);
+        }
+        function validationCheck(weightInKgs, name, gender) {
+            if ((weightInKgs == '') || (name == '') || (gender == '')) {
+                alert("Values in Field Cannot be Null... Please Enter some Value");
+                calculateweight();
+            }
+
+            else if (isNaN(weightInKgs)) {
+                alert("Please Enter Numbers for weight conversion...");
+                calculateweight();
+            }
+            else {
+                weightKgs(weightInKgs);
+                weightInPounds(weightInKgs);
+                weightInOunces(weightInKgs);
+                weightInGrams(weightInKgs);
+                updateName(name, gender);
+            }
+
+        }
+        function weightKgs(weight) {
+            updateKgs(weight);
+        }
+        function weightInPounds(weight) {
+            let weightPounds = (weight * 2.20462).toFixed(3);
+            updatePounds(weightPounds);
+        }
+        function weightInOunces(weight) {
+            let weightOunces = (weight * 35.274).toFixed(3);
+            updateOunces(weightOunces);
+        }
+        function weightInGrams(weight) {
+            let weightGrams = (weight * 1000).toFixed(3);
+            updateGrams(weightGrams);
+        }
+
+        function updateName(name, gender) {
+
+            let p = document.querySelector("p");
+            if (gender.includes('f') || gender.includes('F')) {
+                p.innerHTML = "Welcome " + name + " 👧";
+            }
+            else {
+                p.innerHTML = "Welcome " + name + "👨";
+            }
+            alert("Please Refresh Page to do the Calculation Again.. Thank you " + name + " 😊");
+        }
+        function updateKgs(weightKgs) {
+            document.body.innerHTML = document.body.innerHTML.replace("Kilograms: 0", "Kilograms: " + weightKgs);
+        }
+        function updatePounds(weightPounds) {
+            document.body.innerHTML = document.body.innerHTML.replace("Pounds: 0", "Pounds: " + weightPounds);
+        }
+        function updateOunces(weightOunces) {
+            document.body.innerHTML = document.body.innerHTML.replace("Ounces: 0", "Ounces: " + weightOunces);
+        }
+        function updateGrams(weightGrams) {
+            document.body.innerHTML = document.body.innerHTML.replace("Grams: 0", "Grams: " + weightGrams);
+        }                
+    </script>
+</body>
+</html>
